@@ -6,11 +6,8 @@ import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
-  ArrowDownTrayIcon,
-  SparklesIcon,
-  RocketLaunchIcon
+  ArrowDownTrayIcon
 } from '@heroicons/react/24/outline';
-import { CloudArrowUpIcon as CloudArrowUpIconSolid } from '@heroicons/react/24/solid';
 
 function DataUpload() {
   const { uploadDataFile, uploadStatus, loading, error } = useStore();
@@ -65,65 +62,52 @@ function DataUpload() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-10">
+    <div className="max-w-4xl mx-auto space-y-8">
       {/* Header */}
-      <div className="text-center slide-up">
-        <div className="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl mb-6 hover-lift glow">
-          <CloudArrowUpIconSolid className="h-10 w-10 text-white" />
-          <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
-            <SparklesIcon className="h-3 w-3 text-white" />
-          </div>
+      <div className="text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+          <CloudArrowUpIcon className="h-8 w-8 text-blue-600" />
         </div>
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-3">
-          Upload Data
-        </h1>
-        <p className="text-xl text-gray-600 font-medium">Upload employee and patient data to get started</p>
-        <div className="mt-4 inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2 rounded-full border border-blue-200/50">
-          <RocketLaunchIcon className="h-4 w-4 text-blue-600" />
-          <span className="text-sm font-semibold text-blue-700">Quick & Secure Upload</span>
-        </div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Upload Data</h1>
+        <p className="text-lg text-gray-600">Upload employee and patient data to get started</p>
       </div>
 
       {/* Upload Area */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/60 p-10 card-hover">
-        <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* File Upload Area */}
           <div
-            className={`relative border-3 border-dashed rounded-3xl p-16 transition-all duration-500 ${
+            className={`relative border-2 border-dashed rounded-lg p-12 transition-colors ${
               dragActive 
-                ? 'border-blue-400 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-2xl scale-105' 
-                : 'border-gray-300 hover:border-blue-300 hover:bg-gradient-to-br hover:from-gray-50 hover:to-blue-50'
+                ? 'border-blue-400 bg-blue-50' 
+                : 'border-gray-300 hover:border-gray-400'
             }`}
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
           >
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 to-indigo-600/5 rounded-3xl"></div>
-            <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-blue-400/10 to-indigo-600/10 rounded-full blur-xl"></div>
-            
             <div className="text-center">
-              <div className="mx-auto h-20 w-20 mb-6">
+              <div className="mx-auto h-16 w-16 mb-4">
                 {file ? (
-                  <div className="h-20 w-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-xl hover-lift">
-                    <CheckCircleIcon className="h-10 w-10 text-white" />
+                  <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center">
+                    <CheckCircleIcon className="h-8 w-8 text-green-600" />
                   </div>
                 ) : (
-                  <div className="h-20 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-xl hover-lift float">
-                    <CloudArrowUpIcon className="h-10 w-10 text-white" />
+                  <div className="h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center">
+                    <CloudArrowUpIcon className="h-8 w-8 text-gray-400" />
                   </div>
                 )}
               </div>
               
-              <div className="mt-6">
+              <div className="mt-4">
                 <label htmlFor="file-upload" className="cursor-pointer">
-                  <span className="mt-2 block text-2xl font-bold text-gray-900">
+                  <span className="mt-2 block text-lg font-medium text-gray-900">
                     {file ? file.name : 'Drop your Excel file here or click to browse'}
                   </span>
-                  <span className="mt-3 block text-lg text-gray-500 font-medium">
+                  <span className="mt-1 block text-sm text-gray-500">
                     {file ? (
-                      <span className="text-green-600 font-semibold">✓ File selected successfully</span>
+                      <span className="text-green-600">✓ File selected successfully</span>
                     ) : (
                       'Supports .xlsx and .xls files • Max size: 10MB'
                     )}
@@ -140,37 +124,33 @@ function DataUpload() {
               </div>
               
               {!file && (
-                <div className="mt-8">
-                  <ArrowDownTrayIcon className="mx-auto h-10 w-10 text-blue-400 animate-bounce" />
-                  <p className="mt-2 text-sm text-gray-400 font-medium">Drag & drop or click to select</p>
+                <div className="mt-6">
+                  <ArrowDownTrayIcon className="mx-auto h-8 w-8 text-gray-400" />
                 </div>
               )}
             </div>
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center">
             <button
               type="submit"
               disabled={!file || loading}
-              className={`group relative px-12 py-4 rounded-2xl text-white font-bold transition-all duration-300 shadow-xl ${
+              className={`px-8 py-3 rounded-lg text-white font-medium transition-colors ${
                 !file || loading
-                  ? 'bg-gray-400 cursor-not-allowed opacity-50'
-                  : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105'
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700'
               }`}
             >
-              {!loading && !file && (
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-400/20 to-blue-600/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-2xl"></div>
-              )}
               {loading ? (
-                <div className="relative flex items-center">
-                  <div className="loading-spinner h-6 w-6 mr-3"></div>
-                  <span className="text-lg">Uploading...</span>
+                <div className="flex items-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Uploading...
                 </div>
               ) : (
-                <div className="relative flex items-center">
-                  <CloudArrowUpIcon className="h-6 w-6 mr-3" />
-                  <span className="text-lg">Upload File</span>
+                <div className="flex items-center">
+                  <CloudArrowUpIcon className="h-5 w-5 mr-2" />
+                  Upload File
                 </div>
               )}
             </button>
@@ -180,36 +160,32 @@ function DataUpload() {
 
       {/* Status Messages */}
       {error && (
-        <div className="bg-gradient-to-r from-red-50 to-pink-50 border border-red-200 rounded-3xl p-8 shadow-lg slide-up">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
           <div className="flex items-center">
-            <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center mr-4">
-              <ExclamationTriangleIcon className="h-6 w-6 text-white" />
-            </div>
+            <ExclamationTriangleIcon className="h-6 w-6 text-red-600 mr-3" />
             <div>
-              <h3 className="text-lg font-bold text-red-800">Upload Error</h3>
-              <p className="text-red-600 mt-1 font-medium">{error}</p>
+              <h3 className="text-sm font-medium text-red-800">Upload Error</h3>
+              <p className="text-sm text-red-600 mt-1">{error}</p>
             </div>
           </div>
         </div>
       )}
 
       {uploadStatus && (
-        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-3xl p-8 shadow-lg slide-up">
+        <div className="bg-green-50 border border-green-200 rounded-lg p-6">
           <div className="flex items-center">
-            <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center mr-4">
-              <CheckCircleIcon className="h-6 w-6 text-white" />
-            </div>
+            <CheckCircleIcon className="h-6 w-6 text-green-600 mr-3" />
             <div>
-              <h3 className="text-lg font-bold text-green-800">Upload Successful!</h3>
-              <p className="text-green-600 mt-1 font-medium">{uploadStatus.message}</p>
-              <div className="mt-6 grid grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl p-4 shadow-lg border border-green-200/50">
-                  <p className="text-sm text-gray-500 font-semibold">Employees Loaded</p>
-                  <p className="text-2xl font-bold text-green-600 mt-1">{uploadStatus.employees_count}</p>
+              <h3 className="text-sm font-medium text-green-800">Upload Successful!</h3>
+              <p className="text-sm text-green-600 mt-1">{uploadStatus.message}</p>
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-lg p-3 border border-green-200">
+                  <p className="text-xs text-gray-500">Employees Loaded</p>
+                  <p className="text-lg font-semibold text-green-600">{uploadStatus.employees_count}</p>
                 </div>
-                <div className="bg-white rounded-2xl p-4 shadow-lg border border-green-200/50">
-                  <p className="text-sm text-gray-500 font-semibold">Patients Loaded</p>
-                  <p className="text-2xl font-bold text-green-600 mt-1">{uploadStatus.patients_count}</p>
+                <div className="bg-white rounded-lg p-3 border border-green-200">
+                  <p className="text-xs text-gray-500">Patients Loaded</p>
+                  <p className="text-lg font-semibold text-green-600">{uploadStatus.patients_count}</p>
                 </div>
               </div>
             </div>
@@ -218,51 +194,49 @@ function DataUpload() {
       )}
 
       {/* Instructions */}
-      <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-3xl p-8 border border-blue-200/50 shadow-lg card-hover">
+      <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
         <div className="flex items-center mb-4">
-          <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
-            <InformationCircleIcon className="h-6 w-6 text-white" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-900">Upload Instructions</h3>
+          <InformationCircleIcon className="h-6 w-6 text-blue-600 mr-3" />
+          <h3 className="text-lg font-medium text-gray-900">Upload Instructions</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center text-sm font-bold mt-1 shadow-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
                 1
               </div>
               <div>
-                <p className="text-lg font-bold text-gray-900">Prepare Excel File</p>
-                <p className="text-gray-600 mt-1">Ensure your file has two sheets: "EmployeeDetails" and "PatientDetails"</p>
+                <p className="font-medium text-gray-900">Prepare Excel File</p>
+                <p className="text-sm text-gray-600">Ensure your file has "EmployeeDetails" and "PatientDetails" sheets</p>
               </div>
             </div>
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center text-sm font-bold mt-1 shadow-lg">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
                 2
               </div>
               <div>
-                <p className="text-lg font-bold text-gray-900">Upload File</p>
-                <p className="text-gray-600 mt-1">Drag and drop or click to browse for your Excel file</p>
+                <p className="font-medium text-gray-900">Upload File</p>
+                <p className="text-sm text-gray-600">Drag and drop or click to browse for your Excel file</p>
               </div>
             </div>
           </div>
-          <div className="space-y-6">
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center text-sm font-bold mt-1 shadow-lg">
+          <div className="space-y-4">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
                 3
               </div>
               <div>
-                <p className="text-lg font-bold text-gray-900">Data Validation</p>
-                <p className="text-gray-600 mt-1">The system will automatically validate and process your data</p>
+                <p className="font-medium text-gray-900">Data Validation</p>
+                <p className="text-sm text-gray-600">The system will validate and process your data</p>
               </div>
             </div>
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center text-sm font-bold mt-1 shadow-lg">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
                 4
               </div>
               <div>
-                <p className="text-lg font-bold text-gray-900">Start Using</p>
-                <p className="text-gray-600 mt-1">Once uploaded, you can create assignments and manage your rota</p>
+                <p className="font-medium text-gray-900">Start Using</p>
+                <p className="text-sm text-gray-600">Create assignments and manage your rota</p>
               </div>
             </div>
           </div>
@@ -270,17 +244,15 @@ function DataUpload() {
       </div>
 
       {/* File Requirements */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/60 p-8 card-hover">
-        <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-          <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mr-3">
-            <DocumentTextIcon className="h-5 w-5 text-white" />
-          </div>
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+          <DocumentTextIcon className="h-5 w-5 text-gray-600 mr-2" />
           File Requirements
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-bold text-gray-900 mb-4 text-lg">EmployeeDetails Sheet</h4>
-            <ul className="text-gray-600 space-y-2">
+            <h4 className="font-medium text-gray-900 mb-3">EmployeeDetails Sheet</h4>
+            <ul className="text-sm text-gray-600 space-y-1">
               <li>• EmployeeID, Name, Address, PostCode</li>
               <li>• Gender, Ethnicity, Religion</li>
               <li>• TransportMode, Qualification</li>
@@ -289,8 +261,8 @@ function DataUpload() {
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-gray-900 mb-4 text-lg">PatientDetails Sheet</h4>
-            <ul className="text-gray-600 space-y-2">
+            <h4 className="font-medium text-gray-900 mb-3">PatientDetails Sheet</h4>
+            <ul className="text-sm text-gray-600 space-y-1">
               <li>• PatientID, PatientName, Address</li>
               <li>• Gender, Ethnicity, Religion</li>
               <li>• RequiredSupport, RequiredHoursOfSupport</li>
