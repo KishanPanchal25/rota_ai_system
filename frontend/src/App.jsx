@@ -184,36 +184,24 @@ function App() {
                   item.current
                     ? `bg-gradient-to-r ${item.color} text-white shadow-xl shadow-blue-500/25`
                     : 'text-gray-700 hover:bg-white/60 hover:text-gray-900 hover:shadow-lg'
-                }`} />
-                {item.name}
+                }`}
+                aria-current={item.current ? 'page' : undefined}
+              >
+                {item.current ? (
+                  <item.iconSolid className="mr-4 h-6 w-6 flex-shrink-0 text-white" />
+                ) : (
+                  <item.icon className="mr-4 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-600" />
+                )}
+                <span className="flex-1 text-left">{item.name}</span>
+                {item.current && (
+                  <div className="w-2 h-2 bg-white rounded-full opacity-75"></div>
+                )}
               </button>
             ))}
           </nav>
         </div>
       </div>
 
-      {/* Desktop sidebar */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex flex-col flex-grow bg-white/95 backdrop-blur-sm shadow-2xl border-r border-gray-200">
-          <div className="flex h-16 items-center px-6 border-b border-gray-200">
-            <div className="flex items-center">
-              <div className="h-8 w-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
-                <HomeIcon className="h-5 w-5 text-white" />
-              </div>
-              <h1 className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Healthcare Rota</h1>
-            </div>
-          </div>
-          <nav className="flex-1 space-y-1 px-4 py-4">
-            {navigation.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleNavigation(item.href)}
-                className={`group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
-                  item.current
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                aria-current={item.current ? 'page' : undefined}
       {/* Main content */}
       <div className="lg:pl-72 relative z-10">
         {/* Top bar */}
